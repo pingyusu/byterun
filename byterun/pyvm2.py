@@ -968,6 +968,7 @@ class VirtualMachine(object):
             retval = fn(*posargs, **namedargs)
         else:
             retval = func(*posargs, **namedargs)
+
         self.push(retval)
 
     def byte_RETURN_VALUE(self):
