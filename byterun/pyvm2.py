@@ -963,7 +963,11 @@ class VirtualMachine(object):
                     )
                 )
             func = func.im_func
-        retval = func(*posargs, **namedargs)
+        if inspect.isfunction(func):
+            fn = Function(func.__name__, func.__code__, func.__globals__, [], None, self)
+            retval = fn(*posargs, **namedargs)
+        else:
+            retval = func(*posargs, **namedargs)
         self.push(retval)
 
     def byte_RETURN_VALUE(self):
